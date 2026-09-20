@@ -1,0 +1,105 @@
+---
+interface Tab {
+  id: string;
+  label: string;
+  description: string;
+  command: string;
+}
+
+interface Props {
+  tabs: Tab[];
+}
+
+const { tabs } = Astro.props;
+const defaultTab = tabs[0]?.id ?? '';
+---
+
+<div class="command-tabs" data-default={defaultTab}>
+  <!-- tabs grid -->
+  <div class="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+    {
+      tabs.map((tab) => (
+        <button
+          type="button"
+          class="command-tab w-full rounded-xl border border-slate-800 bg-slate-900/50 px-3 py-3 text-center text-sm font-bold text-white transition hover:border-slate-600 hover:bg-slate-800/50 sm:px-4"
+          data-tab={tab.id}
+        >
+          {tab.label}
+        </button>
+      ))
+    }
+  </div>
+
+  <!-- panel -->
+  <div class="mt-4">
+    {
+      tabs.map((tab) => (
+        <div class="command-panel" data-panel={tab.id}>
+          <div class="rounded-2xl border border-slate-800 bg-slate-950">
+            <div class="flex items-center justify-between border-b border-slate-800 px-5 py-3">
+              <div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">PowerShell</span>
+                <p class="mt-1 text-sm text-slate-300">{tab.description}</p>
+              </div>
+              <button
+                type="button"
+                class="tab-copy-btn flex shrink-0 items-center gap-1.5 rounded-md bg-slate-900 px-3 py-1.5 text-xs font-semibold text-cyan-400 transition hover:bg-slate-800 hover:text-cyan-300"
+                data-code={tab.command}
+              >
+                <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copiar
+              </button>
+            </div>
+            <pre class="code-block p-5 text-sm leading-relaxed text-cyan-300 text-left whitespace-pre-wrap break-all"><code>{tab.command}</code></pre>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.command-tabs').forEach((container) => {
+    const defaultTab = (container as HTMLElement).dataset.default || '';
+    const tabs = container.querySelectorAll('.command-tab');
+    const panels = container.querySelectorAll('.command-panel');
+
+    function activate(tabId: string) {
+      tabs.forEach((tab) => {
+        const isActive = tab.getAttribute('data-tab') === tabId;
+        tab.classList.toggle('border-emerald-500/50', isActive);
+        tab.classList.toggle('bg-slate-800/80', isActive);
+        tab.classList.toggle('border-slate-800', !isActive);
+        tab.classList.toggle('bg-slate-900/50', !isActive);
+      });
+
+      panels.forEach((panel) => {
+        const isActive = panel.getAttribute('data-panel') === tabId;
+        (panel as HTMLElement).style.display = isActive ? 'block' : 'none';
+      });
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.getAttribute('data-tab') || '';
+        activate(tabId);
+      });
+    });
+
+    activate(defaultTab);
+  });
+
+  document.querySelectorAll('.tab-copy-btn').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const code = (button as HTMLButtonElement).dataset.code || '';
+      await navigator.clipboard.writeText(code);
+      const original = button.innerHTML;
+      button.innerHTML = '<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Copiado';
+      setTimeout(() => {
+        button.innerHTML = original;
+      }, 2000);
+    });
+  });
+</script>

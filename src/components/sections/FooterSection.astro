@@ -58,8 +58,21 @@ const issuesUrl = `${githubUrl}/issues`;
       </div>
     </div>
 
-    <div class="mt-12 text-center text-xs text-slate-600">
-      MIT License · {new Date().getFullYear()}
+    <div class="mt-12 flex flex-col items-center gap-3 text-center">
+      <p class="text-sm text-slate-400">
+        Hecho con <span class="text-red-500">❤️</span> por{' '}
+        <a
+          href="https://devcito.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-emerald-400 transition hover:text-emerald-300 hover:underline"
+        >
+          devcito
+        </a>
+      </p>
+      <p class="text-xs text-slate-600">
+        MIT License · {new Date().getFullYear()}
+      </p>
     </div>
   </div>
 </footer>

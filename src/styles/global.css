@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --color-brand-50: #ecfdf5;
@@ -27,6 +27,7 @@ html {
 
 body {
   font-family: var(--font-sans);
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -101,4 +102,21 @@ body {
 
 .text-shadow {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Ocultar scrollbars feas en bloques de código */
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Forzar que el código largo se ajuste sin scroll horizontal */
+pre code {
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }

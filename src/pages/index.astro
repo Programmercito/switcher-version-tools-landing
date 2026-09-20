@@ -1,22 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import Features from '../components/Features.astro';
-import Tools from '../components/Tools.astro';
-import Install from '../components/Install.astro';
-import Usage from '../components/Usage.astro';
-import Footer from '../components/Footer.astro';
+import Navbar from '../components/sections/Navbar.astro';
+import HeroSection from '../components/sections/HeroSection.astro';
+import FeaturesSection from '../components/sections/FeaturesSection.astro';
+import ToolsSection from '../components/sections/ToolsSection.astro';
+import InstallSection from '../components/sections/InstallSection.astro';
+import BuildSection from '../components/sections/BuildSection.astro';
+import UsageSection from '../components/sections/UsageSection.astro';
+import FooterSection from '../components/sections/FooterSection.astro';
 ---
 
 <Layout>
   <Navbar />
   <main>
-    <Hero />
-    <Features />
-    <Tools />
-    <Install />
-    <Usage />
+    <HeroSection />
+    <FeaturesSection />
+    <ToolsSection />
+    <InstallSection />
+    <BuildSection />
+    <UsageSection />
   </main>
-  <Footer />
+  <FooterSection />
 </Layout>
