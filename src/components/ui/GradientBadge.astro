@@ -1,0 +1,19 @@
+---
+interface Props {
+  text: string;
+  gradient?: string;
+  class?: string;
+}
+
+const {
+  text,
+  gradient = 'from-emerald-500 to-cyan-500',
+  class: className = '',
+} = Astro.props;
+---
+
+<span
+  class={`inline-flex rounded-full bg-gradient-to-r ${gradient} px-3 py-1 text-xs font-bold text-white shadow-lg ${className}`}
+>
+  {text}
+</span>

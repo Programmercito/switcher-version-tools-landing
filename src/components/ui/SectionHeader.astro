@@ -1,0 +1,27 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  eyebrowColor?: 'emerald' | 'cyan';
+}
+
+const { eyebrow, title, description, eyebrowColor = 'emerald' } = Astro.props;
+
+const colorClasses = {
+  emerald: 'text-emerald-400',
+  cyan: 'text-cyan-400',
+};
+---
+
+<div class="mx-auto max-w-2xl text-center">
+  <h2 class={`text-base font-semibold leading-7 ${colorClasses[eyebrowColor]}`}>
+    {eyebrow}
+  </h2>
+  <p class="mt-2 text-3xl font-bold tracking-tight text-white sm:text-5xl">
+    {title}
+  </p>
+  <p class="mt-6 text-lg leading-8 text-slate-300">
+    {description}
+  </p>
+</div>
