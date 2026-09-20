@@ -1,60 +1,128 @@
 ---
+import Terminal from './Terminal.astro';
+
 const githubUrl = 'https://github.com/Programmercito/switcher-version-tools';
 const releaseUrl = `${githubUrl}/releases`;
+const installCommand = 'choco install switchtool';
 ---
 
-<section class="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-28">
+<section class="relative overflow-hidden pt-28 pb-16 lg:pt-36 lg:pb-24">
+  <!-- fondo degradado animado -->
   <div
-    class="pointer-events-none absolute inset-0 -z-10 opacity-60"
+    class="pointer-events-none absolute inset-0 -z-10 opacity-70"
     aria-hidden="true"
   >
     <div
-      class="absolute -top-1/4 -right-1/4 h-[600px] w-[600px] rounded-full bg-emerald-500/10 blur-3xl"
+      class="animated-gradient absolute -top-1/3 -right-1/4 h-[800px] w-[800px] rounded-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-500/20 via-cyan-500/10 to-transparent blur-3xl"
     >
     </div>
     <div
-      class="absolute top-1/3 -left-1/4 h-[500px] w-[500px] rounded-full bg-cyan-500/10 blur-3xl"
+      class="animated-gradient absolute top-1/4 -left-1/4 h-[700px] w-[700px] rounded-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-500/15 via-emerald-500/5 to-transparent blur-3xl"
+      style="animation-delay: -4s;"
     >
     </div>
   </div>
 
+  <!-- grid sutil -->
+  <div
+    class="pointer-events-none absolute inset-0 -z-10 opacity-[0.03]"
+    style="background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px); background-size: 60px 60px;"
+    aria-hidden="true"
+  >
+  </div>
+
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-3xl text-center">
+    <div class="mx-auto max-w-4xl text-center">
+      <!-- badge -->
       <div
-        class="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-300"
+        class="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-gradient-to-r from-emerald-500/15 to-cyan-500/15 px-5 py-2 text-sm font-semibold text-emerald-300 shadow-lg shadow-emerald-500/10"
       >
-        <span class="relative flex h-2 w-2">
+        <span class="relative flex h-2.5 w-2.5">
           <span
             class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"
           ></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"
+          <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400"
           ></span>
         </span>
         CLI para desarrolladores en Windows
       </div>
 
-      <h1 class="text-5xl font-extrabold tracking-tight sm:text-7xl">
-        <span class="block text-white">Domina tus</span>
+      <!-- título -->
+      <h1 class="text-5xl font-extrabold tracking-tight sm:text-7xl lg:text-8xl">
+        <span class="block text-white">Gestioná tus</span>
         <span class="gradient-text">versiones</span>
-        <span class="block text-white">sin tocar el PATH</span>
+        <span class="block text-white">como un profesional</span>
       </h1>
 
+      <!-- subtítulo -->
       <p
         class="mx-auto mt-8 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl"
       >
         <strong class="text-emerald-400">switchtool</strong> es un CLI en Go que
-        descarga, extrae y configura automáticamente Java, Maven, Gradle, PHP,
-        Go y Node.js en Windows. Cambiá de versión con un solo comando.
+        te permite instalar, cambiar y administrar versiones de{' '}
+        <span class="text-white">Java, Maven, Gradle, PHP, Go y Node.js</span>{' '}
+        en Windows sin tocar el PATH a mano. Descargá, extraé y configurá todo
+        con un solo comando.
       </p>
 
+      <!-- instalación prominente y centrada -->
+      <div class="mx-auto mt-10 max-w-xl">
+        <p class="mb-3 text-sm font-medium uppercase tracking-widest text-slate-500">
+          Instalá en segundos con Chocolatey
+        </p>
+        <div
+          class="group relative overflow-hidden rounded-2xl border border-emerald-500/30 bg-slate-950/80 shadow-2xl shadow-emerald-500/10 backdrop-blur-sm transition hover:border-emerald-400/50 hover:shadow-emerald-500/20"
+        >
+          <div
+            class="absolute inset-0 -z-10 bg-gradient-to-r from-emerald-500/10 via-transparent to-cyan-500/10 opacity-0 transition duration-500 group-hover:opacity-100"
+          >
+          </div>
+          <div
+            class="flex items-center justify-between border-b border-slate-800 px-5 py-3"
+          >
+            <div class="flex items-center gap-2">
+              <div class="h-3 w-3 rounded-full bg-red-500"></div>
+              <div class="h-3 w-3 rounded-full bg-yellow-500"></div>
+              <div class="h-3 w-3 rounded-full bg-green-500"></div>
+            </div>
+            <button
+              type="button"
+              class="install-copy-btn flex items-center gap-1.5 rounded-md bg-slate-800 px-3 py-1 text-xs font-semibold text-emerald-400 transition hover:bg-slate-700 hover:text-emerald-300"
+              data-code={installCommand}
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <span>Copiar</span>
+            </button>
+          </div>
+          <div class="code-block flex items-center justify-center px-6 py-6">
+            <code class="text-xl font-semibold text-emerald-300 sm:text-2xl"
+              >{installCommand}</code
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA secundarios -->
       <div
         class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
       >
         <a
-          href="#instalar"
-          class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:scale-105 hover:shadow-emerald-500/30 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-slate-950"
+          href="#como-funciona"
+          class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-emerald-500/25 transition hover:scale-105 hover:shadow-emerald-500/40 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2 focus:ring-offset-slate-950"
         >
-          Instalar con Chocolatey
+          Cómo funciona
           <svg
             class="h-5 w-5"
             fill="none"
@@ -72,7 +140,7 @@ const releaseUrl = `${githubUrl}/releases`;
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/50 px-8 py-4 text-base font-semibold text-slate-200 backdrop-blur transition hover:border-slate-500 hover:bg-slate-800 hover:text-white"
+          class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/60 px-8 py-4 text-base font-bold text-slate-200 backdrop-blur transition hover:border-slate-500 hover:bg-slate-800 hover:text-white"
         >
           <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
             <path
@@ -92,5 +160,22 @@ const releaseUrl = `${githubUrl}/releases`;
         >
       </p>
     </div>
+
+    <Terminal />
   </div>
+
+  <script>
+    document.querySelectorAll('.install-copy-btn').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const code = (button as HTMLButtonElement).dataset.code || '';
+        await navigator.clipboard.writeText(code);
+        const label = button.querySelector('span');
+        const original = label?.textContent;
+        if (label) label.textContent = '¡Copiado!';
+        setTimeout(() => {
+          if (label && original) label.textContent = original;
+        }, 2000);
+      });
+    });
+  </script>
 </section>
