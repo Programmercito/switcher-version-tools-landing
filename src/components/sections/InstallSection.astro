@@ -5,7 +5,7 @@ import CodeBlock from '../ui/CodeBlock.astro';
 
 const releaseUrl = 'https://github.com/Programmercito/switcher-version-tools/releases';
 
-const addToPathCommand = `$dir = "C:\\Tools\\switchtool"
+const addToPathCommand = `$dir = "C:\\Tools"
 $path = [Environment]::GetEnvironmentVariable("Path", "User")
 [Environment]::SetEnvironmentVariable("Path", "$path;$dir", "User")`;
 
@@ -30,156 +30,170 @@ const verifyCommand = 'switchtool --version';
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <SectionHeader
       eyebrow="Instalación"
-      title="Instalación en 4 pasos"
-      description="Sin instaladores ni dependencias: bajás el ejecutable, lo ponés en una carpeta, la sumás al PATH y listo."
+      title="Instalalo en 4 pasos"
+      description="Sin instaladores ni dependencias: un solo .exe y cuatro pasos."
     />
 
-    <div class="mx-auto mt-20 grid max-w-4xl gap-8 md:grid-cols-2">
-      <!-- Paso 1: Descargar -->
-      <Card glow class="group relative flex flex-col overflow-hidden">
-        <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-cyan-500">
-        </div>
-        <div class="flex flex-1 flex-col p-7">
-          <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-white">Descargá el binario</h3>
-            <span
-              class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-bold text-emerald-300"
-              >1</span
-            >
-          </div>
-
-          <p class="mt-4 leading-relaxed text-slate-400">
-            Bajá
-            <code class="text-emerald-300">switchtool.exe</code>
-            desde GitHub Releases. Es un único archivo, no necesita instalación.
-          </p>
-
-          <a
-            href={releaseUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-950 px-6 py-3 text-sm font-bold text-white transition hover:border-emerald-500/50 hover:bg-slate-900"
+    <div class="mx-auto mt-20 max-w-3xl">
+      <ol class="steps space-y-6">
+        <!-- Paso 1 -->
+        <li class="relative pl-14 sm:pl-16">
+          <span
+            class="absolute left-0 top-7 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 text-base font-extrabold text-white shadow-lg shadow-emerald-500/30 ring-4 ring-slate-950"
+            >1</span
           >
-            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+          <Card glow>
+            <div class="p-7 sm:p-8">
+              <h3 class="text-xl font-bold text-white">
+                Descargá el binario
+              </h3>
+              <p class="mt-3 leading-relaxed text-slate-400">
+                Bajá{' '}
+                <code class="text-emerald-300">switchtool.exe</code>{' '}
+                desde GitHub Releases. Es un único archivo: no necesita
+                instalación.
+              </p>
+              <a
+                href={releaseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-emerald-500/25 transition hover:scale-[1.03] hover:shadow-emerald-500/40"
+              >
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                  ></path>
+                </svg>
+                Ir a Releases
+              </a>
+            </div>
+          </Card>
+        </li>
+
+        <!-- Paso 2 -->
+        <li class="relative pl-14 sm:pl-16">
+          <span
+            class="absolute left-0 top-7 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 text-base font-extrabold text-white shadow-lg shadow-emerald-500/30 ring-4 ring-slate-950"
+            >2</span
+          >
+          <Card glow>
+            <div class="p-7 sm:p-8">
+              <h3 class="text-xl font-bold text-white">
+                Elegí una ubicación fija
+              </h3>
+              <p class="mt-3 leading-relaxed text-slate-400">
+                Guardá el{' '}
+                <code class="text-emerald-300">.exe</code>{' '}
+                en una carpeta duradera, por ejemplo{' '}
+                <code class="text-emerald-300">C:\Tools</code>{' '}
+                (evitá Descargas o Escritorio).
+              </p>
+            </div>
+          </Card>
+        </li>
+
+        <!-- Paso 3 -->
+        <li class="relative pl-14 sm:pl-16">
+          <span
+            class="absolute left-0 top-7 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 text-base font-extrabold text-white shadow-lg shadow-emerald-500/30 ring-4 ring-slate-950"
+            >3</span
+          >
+          <Card glow>
+            <div class="p-7 sm:p-8">
+              <h3 class="text-xl font-bold text-white">
+                Agregá la carpeta al PATH
+              </h3>
+              <p class="mt-3 leading-relaxed text-slate-400">
+                Corré esto en PowerShell (ajustá{' '}
+                <code class="text-emerald-300">$dir</code>{' '}
+                si usaste otra carpeta), o hacelo desde Configuración →
+                Editar variables de entorno del sistema.
+              </p>
+              <div class="mt-6">
+                <CodeBlock code={addToPathCommand} label="PowerShell" />
+              </div>
+            </div>
+          </Card>
+        </li>
+
+        <!-- Paso 4 -->
+        <li class="relative pl-14 sm:pl-16">
+          <span
+            class="absolute left-0 top-7 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 text-base font-extrabold text-white shadow-lg shadow-emerald-500/30 ring-4 ring-slate-950"
+            >4</span
+          >
+          <Card glow>
+            <div class="p-7 sm:p-8">
+              <h3 class="text-xl font-bold text-white">
+                Reabrí la terminal y verificá
+              </h3>
+              <p class="mt-3 leading-relaxed text-slate-400">
+                Los cambios de PATH se aplican en las sesiones nuevas. Abrí
+                una terminal y probá:
+              </p>
+              <div class="mt-6">
+                <CodeBlock code={verifyCommand} label="Terminal" />
+              </div>
+            </div>
+          </Card>
+        </li>
+      </ol>
+
+      <div
+        class="mt-14 rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-emerald-500/5 p-8"
+      >
+        <div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+          <div class="rounded-2xl bg-cyan-500/10 p-3 text-cyan-400">
+            <svg
+              class="h-8 w-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-              ></path>
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
             </svg>
-            Ir a Releases
-          </a>
-        </div>
-      </Card>
-
-      <!-- Paso 2: Ubicación -->
-      <Card glow class="group relative flex flex-col overflow-hidden">
-        <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-cyan-500">
-        </div>
-        <div class="flex flex-1 flex-col p-7">
-          <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-white">Elegí una ubicación fija</h3>
-            <span
-              class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-bold text-emerald-300"
-              >2</span
-            >
           </div>
-
-          <p class="mt-4 leading-relaxed text-slate-400">
-            Guardá el <code class="text-emerald-300">.exe</code>
-            en una carpeta que no vayas a borrar, por ejemplo
-            <code class="text-emerald-300">C:\Tools\switchtool</code>
-            (evitá Descargas o Escritorio).
-          </p>
-
-          <div class="mt-auto pt-6">
-            <CodeBlock
-              code="C:\Tools\switchtool\switchtool.exe"
-              label="Ubicación sugerida"
-              variant="cyan"
-            />
+          <div>
+            <h4 class="text-lg font-bold text-white">
+              Y listo: se acabó el{' '}
+              <code class="text-cyan-300">.\switchtool.exe</code>
+            </h4>
+            <p class="mt-2 text-slate-300">
+              Con la carpeta en el PATH, escribís solo{' '}
+              <code class="rounded-lg bg-slate-950 px-2 py-1 text-emerald-300">switchtool</code>{' '}
+              desde cualquier directorio. Si la terminal no lo encuentra,
+              reabrila: es el paso que más se olvida.
+            </p>
           </div>
-        </div>
-      </Card>
-
-      <!-- Paso 3: PATH -->
-      <Card glow class="group relative flex flex-col overflow-hidden">
-        <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-cyan-500">
-        </div>
-        <div class="flex flex-1 flex-col p-7">
-          <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-white">Sumá la carpeta al PATH</h3>
-            <span
-              class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-bold text-emerald-300"
-              >3</span
-            >
-          </div>
-
-          <p class="mt-4 leading-relaxed text-slate-400">
-            Corré esto en PowerShell (ajustá
-            <code class="text-emerald-300">$dir</code>
-            si usaste otra carpeta), o agregala desde Configuración → Variables
-            de entorno.
-          </p>
-
-          <div class="mt-auto pt-6">
-            <CodeBlock code={addToPathCommand} label="PowerShell" />
-          </div>
-        </div>
-      </Card>
-
-      <!-- Paso 4: Verificar -->
-      <Card glow class="group relative flex flex-col overflow-hidden">
-        <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-cyan-500">
-        </div>
-        <div class="flex flex-1 flex-col p-7">
-          <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-white">Probá en una terminal nueva</h3>
-            <span
-              class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-bold text-emerald-300"
-              >4</span
-            >
-          </div>
-
-          <p class="mt-4 leading-relaxed text-slate-400">
-            Cerrá y reabrí la terminal para que el PATH surta efecto. Después
-            funciona desde cualquier carpeta:
-          </p>
-
-          <div class="mt-auto pt-6">
-            <CodeBlock code={verifyCommand} label="Terminal" />
-          </div>
-        </div>
-      </Card>
-    </div>
-
-    <div class="mx-auto mt-16 max-w-4xl rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-emerald-500/5 p-8">
-      <div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
-        <div class="rounded-2xl bg-cyan-500/10 p-3 text-cyan-400">
-          <svg
-            class="h-8 w-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </div>
-        <div>
-          <h4 class="text-lg font-bold text-white">Con el PATH configurado, se acabó el <code class="text-cyan-300">.\switchtool.exe</code></h4>
-          <p class="mt-2 text-slate-300">
-            Al estar la carpeta en el PATH, escribís solo{' '}
-            <code class="rounded-lg bg-slate-950 px-2 py-1 text-emerald-300">
-              switchtool
-            </code>{' '}
-            desde cualquier directorio. Si no lo reconoce, reabrí la terminal:
-            los cambios de PATH se aplican en las sesiones nuevas.
-          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .steps {
+    position: relative;
+  }
+  .steps li::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 4.25rem;
+    bottom: -3.5rem;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      rgb(16 185 129 / 0.5),
+      rgb(6 182 212 / 0.35)
+    );
+  }
+  .steps li:last-child::before {
+    display: none;
+  }
+</style>
