@@ -2,9 +2,14 @@
 import SectionHeader from '../ui/SectionHeader.astro';
 import Card from '../ui/Card.astro';
 import CodeBlock from '../ui/CodeBlock.astro';
-import GradientBadge from '../ui/GradientBadge.astro';
 
 const releaseUrl = 'https://github.com/Programmercito/switcher-version-tools/releases';
+
+const addToPathCommand = `$dir = "C:\\Tools\\switchtool"
+$path = [Environment]::GetEnvironmentVariable("Path", "User")
+[Environment]::SetEnvironmentVariable("Path", "$path;$dir", "User")`;
+
+const verifyCommand = 'switchtool --version';
 ---
 
 <section id="instalar" class="relative py-24 lg:py-32">
@@ -25,48 +30,28 @@ const releaseUrl = 'https://github.com/Programmercito/switcher-version-tools/rel
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
     <SectionHeader
       eyebrow="Instalación"
-      title="Elegí cómo empezar"
-      description="La forma más rápida es Chocolatey. Si no lo usás, descargá el ejecutable directo desde GitHub Releases."
+      title="Instalación en 4 pasos"
+      description="Sin instaladores ni dependencias: bajás el ejecutable, lo ponés en una carpeta, la sumás al PATH y listo."
     />
 
     <div class="mx-auto mt-20 grid max-w-4xl gap-8 md:grid-cols-2">
-      <!-- Chocolatey -->
+      <!-- Paso 1: Descargar -->
       <Card glow class="group relative flex flex-col overflow-hidden">
         <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-cyan-500">
         </div>
         <div class="flex flex-1 flex-col p-7">
           <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-white">Chocolatey</h3>
-            <GradientBadge text="Recomendado" />
-          </div>
-
-          <div class="mt-5">
-            <CodeBlock code="choco install swtool" label="PowerShell / CMD" align="center" />
-          </div>
-
-          <p class="mt-5 leading-relaxed text-slate-400">
-            Si ya tenés Chocolatey, en unos segundos tenés switchtool en el PATH
-            listo para usar.
-          </p>
-        </div>
-      </Card>
-
-      <!-- Binario -->
-      <Card glow class="group relative flex flex-col overflow-hidden">
-        <div class="h-1.5 w-full bg-gradient-to-r from-slate-500 to-slate-400">
-        </div>
-        <div class="flex flex-1 flex-col p-7">
-          <div class="flex items-center justify-between">
-            <h3 class="text-xl font-bold text-white">Descargar binario</h3>
-            <GradientBadge
-              text="Manual"
-              gradient="from-slate-500 to-slate-400"
-            />
+            <h3 class="text-xl font-bold text-white">Descargá el binario</h3>
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-bold text-emerald-300"
+              >1</span
+            >
           </div>
 
           <p class="mt-4 leading-relaxed text-slate-400">
-            Bajá <code class="text-emerald-300">switchtool.exe</code> desde
-            Releases, guardalo en una carpeta y agregala al PATH de Windows.
+            Bajá
+            <code class="text-emerald-300">switchtool.exe</code>
+            desde GitHub Releases. Es un único archivo, no necesita instalación.
           </p>
 
           <a
@@ -82,6 +67,86 @@ const releaseUrl = 'https://github.com/Programmercito/switcher-version-tools/rel
             </svg>
             Ir a Releases
           </a>
+        </div>
+      </Card>
+
+      <!-- Paso 2: Ubicación -->
+      <Card glow class="group relative flex flex-col overflow-hidden">
+        <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-cyan-500">
+        </div>
+        <div class="flex flex-1 flex-col p-7">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-bold text-white">Elegí una ubicación fija</h3>
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-bold text-emerald-300"
+              >2</span
+            >
+          </div>
+
+          <p class="mt-4 leading-relaxed text-slate-400">
+            Guardá el <code class="text-emerald-300">.exe</code>
+            en una carpeta que no vayas a borrar, por ejemplo
+            <code class="text-emerald-300">C:\Tools\switchtool</code>
+            (evitá Descargas o Escritorio).
+          </p>
+
+          <div class="mt-auto pt-6">
+            <CodeBlock
+              code="C:\Tools\switchtool\switchtool.exe"
+              label="Ubicación sugerida"
+              variant="cyan"
+            />
+          </div>
+        </div>
+      </Card>
+
+      <!-- Paso 3: PATH -->
+      <Card glow class="group relative flex flex-col overflow-hidden">
+        <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-cyan-500">
+        </div>
+        <div class="flex flex-1 flex-col p-7">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-bold text-white">Sumá la carpeta al PATH</h3>
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-bold text-emerald-300"
+              >3</span
+            >
+          </div>
+
+          <p class="mt-4 leading-relaxed text-slate-400">
+            Corré esto en PowerShell (ajustá
+            <code class="text-emerald-300">$dir</code>
+            si usaste otra carpeta), o agregala desde Configuración → Variables
+            de entorno.
+          </p>
+
+          <div class="mt-auto pt-6">
+            <CodeBlock code={addToPathCommand} label="PowerShell" />
+          </div>
+        </div>
+      </Card>
+
+      <!-- Paso 4: Verificar -->
+      <Card glow class="group relative flex flex-col overflow-hidden">
+        <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-cyan-500">
+        </div>
+        <div class="flex flex-1 flex-col p-7">
+          <div class="flex items-center justify-between">
+            <h3 class="text-xl font-bold text-white">Probá en una terminal nueva</h3>
+            <span
+              class="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/15 text-sm font-bold text-emerald-300"
+              >4</span
+            >
+          </div>
+
+          <p class="mt-4 leading-relaxed text-slate-400">
+            Cerrá y reabrí la terminal para que el PATH surta efecto. Después
+            funciona desde cualquier carpeta:
+          </p>
+
+          <div class="mt-auto pt-6">
+            <CodeBlock code={verifyCommand} label="Terminal" />
+          </div>
         </div>
       </Card>
     </div>
@@ -104,14 +169,14 @@ const releaseUrl = 'https://github.com/Programmercito/switcher-version-tools/rel
           </svg>
         </div>
         <div>
-          <h4 class="text-lg font-bold text-white">Importante para Windows</h4>
+          <h4 class="text-lg font-bold text-white">Con el PATH configurado, se acabó el <code class="text-cyan-300">.\switchtool.exe</code></h4>
           <p class="mt-2 text-slate-300">
-            Después de instalar o cambiar de versión, ejecutá{' '}
+            Al estar la carpeta en el PATH, escribís solo{' '}
             <code class="rounded-lg bg-slate-950 px-2 py-1 text-emerald-300">
-              refreshenv
+              switchtool
             </code>{' '}
-            si tenés Chocolatey, o cerrá y volvé a abrir la terminal para que
-            los cambios en el PATH se apliquen.
+            desde cualquier directorio. Si no lo reconoce, reabrí la terminal:
+            los cambios de PATH se aplican en las sesiones nuevas.
           </p>
         </div>
       </div>

@@ -3,7 +3,7 @@ import TerminalWindow from '../ui/TerminalWindow.astro';
 
 const githubUrl = 'https://github.com/Programmercito/switcher-version-tools';
 const releaseUrl = `${githubUrl}/releases`;
-const installCommand = 'choco install swtool';
+const installCommand = 'switchtool --version';
 ---
 
 <section class="relative overflow-hidden pt-16 pb-8 sm:pt-20 sm:pb-10 lg:pt-24 lg:pb-12">
@@ -62,7 +62,7 @@ const installCommand = 'choco install swtool';
 
       <div class="mx-auto mt-5 max-w-xl sm:mt-6">
         <p class="mb-2 text-xs font-medium uppercase tracking-widest text-slate-500 sm:mb-3 sm:text-sm">
-          Instalá con Chocolatey
+          Desde cualquier terminal
         </p>
         <div
           class="group relative overflow-hidden rounded-2xl border border-emerald-500/30 bg-slate-950/80 shadow-2xl shadow-emerald-500/10 backdrop-blur-sm transition hover:border-emerald-400/50 hover:shadow-emerald-500/20"
@@ -145,12 +145,14 @@ const installCommand = 'choco install swtool';
       </div>
 
       <p class="mt-3 text-xs text-slate-500 sm:text-sm">
-        También disponible en <a
+        Descargá el binario desde{' '}
+        <a
           href={releaseUrl}
           target="_blank"
           rel="noopener noreferrer"
           class="underline hover:text-emerald-400">Releases</a
         >
+        y sumá la carpeta al PATH
       </p>
     </div>
 
