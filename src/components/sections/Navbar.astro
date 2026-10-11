@@ -32,10 +32,10 @@ const links = [
         links.map((link) => (
           <a
             href={link.href}
-            class="relative text-sm font-semibold text-slate-300 transition hover:text-white"
+            class="group relative text-sm font-semibold text-slate-300 transition hover:text-white"
           >
             {link.label}
-            <span class="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-cyan-400 transition-all duration-300 hover:w-full" />
+            <span class="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-cyan-400 transition-all duration-300 group-hover:w-full" />
           </a>
         ))
       }
@@ -105,6 +105,9 @@ const links = [
         }
         openIcon?.classList.toggle('hidden');
         closeIcon?.classList.toggle('hidden');
+        const isOpen = !menu?.classList.contains('hidden');
+        button.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+        button.setAttribute('aria-expanded', String(isOpen));
       });
     });
 
@@ -117,6 +120,8 @@ const links = [
         menu?.classList.add('hidden');
         openIcon?.classList.remove('hidden');
         closeIcon?.classList.add('hidden');
+        button?.setAttribute('aria-label', 'Abrir menú');
+        button?.setAttribute('aria-expanded', 'false');
       });
     });
   </script>
