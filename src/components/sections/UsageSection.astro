@@ -3,6 +3,14 @@ import SectionHeader from '../ui/SectionHeader.astro';
 import CommandTabs from '../ui/CommandTabs.astro';
 import Card from '../ui/Card.astro';
 import GradientBadge from '../ui/GradientBadge.astro';
+import CodeBlock from '../ui/CodeBlock.astro';
+
+const projectConfig = `{
+  "tools": {
+    "java": "jdk17",
+    "node": "node20"
+  }
+}`;
 
 const examples = [
   {
@@ -16,19 +24,37 @@ const examples = [
     id: 'local',
     label: 'Archivo local',
     description: 'Instalá desde un .zip que ya tengas en disco.',
-    command: 'switchtool php 8.2 C:\\Downloads\\php-8.2.10-Win32-vs16-x64.zip',
+    command: 'switchtool php php8.2 C:\\Downloads\\php-8.2.10-Win32-vs16-x64.zip',
+  },
+  {
+    id: 'pnpm',
+    label: 'Instalar pnpm',
+    description: 'Instalá la distribución standalone de pnpm para Windows.',
+    command: 'switchtool pnpm v12.11.2 https://github.com/pnpm/pnpm/releases/download/v12.11.2/pnpm-win32-x64.zip',
   },
   {
     id: 'switch',
     label: 'Cambiar de versión',
-    description: 'Actualizá el PATH y las variables de entorno al instante.',
+    description: 'Actualizá el PATH y las variables de entorno de usuario.',
     command: 'switchtool jdk17\nswitchtool php8.2',
   },
   {
     id: 'list',
     label: 'Listar instalaciones',
-    description: 'Vé qué versiones tenés y cuál está activa.',
+    description: 'Mirá la versión real detectada, el alias, la ruta y cuál está activa.',
     command: 'switchtool list\n# o\nswitchtool ls',
+  },
+  {
+    id: 'scripts',
+    label: 'Salida para scripts',
+    description: 'Elegí JSON o un alias por línea. También podés desactivar colores.',
+    command: 'switchtool list --json\nswitchtool list --quiet\nswitchtool --no-color list',
+  },
+  {
+    id: 'doctor',
+    label: 'Diagnosticar',
+    description: 'Revisá instalaciones, variables y conflictos en el PATH de esta terminal.',
+    command: 'switchtool doctor',
   },
   {
     id: 'remove',
@@ -64,6 +90,29 @@ const examples = [
 
     <div class="mx-auto mt-20 max-w-5xl">
       <CommandTabs tabs={examples} />
+      <p class="mt-4 text-sm text-slate-400">
+        Al cambiar de versión, abrí una terminal nueva o actualizá el entorno de la sesión:
+        los cambios persistidos no se aplican automáticamente a la terminal actual.
+      </p>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-5xl">
+      <Card class="p-8 lg:p-10">
+        <h3 class="text-2xl font-bold text-white">Activá las herramientas de un proyecto</h3>
+        <p class="mt-3 text-slate-400">
+          Creá <code class="text-cyan-300">switchtool.json</code> en el directorio desde el que
+          ejecutás el comando. Los alias deben estar instalados previamente para cada herramienta.
+        </p>
+        <div class="mt-6 grid gap-4 lg:grid-cols-2">
+          <CodeBlock code={projectConfig} label="switchtool.json" variant="cyan" align="left" />
+          <CodeBlock code="switchtool project use" label="Terminal" variant="cyan" align="left" />
+        </div>
+        <p class="mt-4 text-sm text-slate-400">
+          La activación es explícita y cambia las versiones globales de tu usuario en Windows;
+          no se aplica automáticamente al entrar al directorio. Si un cambio de entorno falla,
+          los cambios anteriores podrían haber quedado aplicados.
+        </p>
+      </Card>
     </div>
 
     <div class="mx-auto mt-20 max-w-5xl">

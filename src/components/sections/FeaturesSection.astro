@@ -6,7 +6,7 @@ const features = [
   {
     title: 'Descarga automática',
     description:
-      'Pasale una URL o un archivo local .zip, .tar.gz o .tgz. switchtool se encarga de bajar, verificar y descomprimir todo por vos.',
+      'Instalá desde una URL o un archivo local .zip, .tar.gz o .tgz. Las descargas muestran progreso y reintentan errores transitorios.',
     icon: 'download',
     gradient: 'from-emerald-400 to-cyan-400',
   },
@@ -20,7 +20,7 @@ const features = [
   {
     title: 'Variables de entorno',
     description:
-      'Setea JAVA_HOME, MAVEN_HOME, GRADLE_HOME, PHP_HOME, GOROOT y NODE_HOME en el registro de Windows sin que vos hagas nada.',
+      'Configurá JAVA_HOME, MAVEN_HOME, GRADLE_HOME, PHP_HOME, GOROOT, NODE_HOME y PNPM_HOME en el entorno de usuario.',
     icon: 'env',
     gradient: 'from-emerald-500 to-teal-400',
   },
@@ -45,6 +45,27 @@ const features = [
     icon: 'ui',
     gradient: 'from-cyan-500 to-indigo-400',
   },
+  {
+    title: 'Diagnóstico del entorno',
+    description:
+      'Con switchtool doctor detectá instalaciones ausentes, variables incorrectas y conflictos con el PATH de la terminal.',
+    icon: 'diagnostic',
+    gradient: 'from-amber-400 to-emerald-400',
+  },
+  {
+    title: 'Versiones por proyecto',
+    description:
+      'Definí los alias de un proyecto en switchtool.json y activalos explícitamente con switchtool project use.',
+    icon: 'project',
+    gradient: 'from-blue-400 to-cyan-400',
+  },
+  {
+    title: 'Listas para scripts',
+    description:
+      'Consultá la versión real detectada y exportá tus instalaciones como JSON o como una lista de alias.',
+    icon: 'list',
+    gradient: 'from-violet-400 to-cyan-400',
+  },
 ];
 
 const icons: Record<string, string> = {
@@ -56,6 +77,9 @@ const icons: Record<string, string> = {
     'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z',
   switch: 'M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4',
   ui: 'M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01',
+  diagnostic: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  project: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z',
+  list: 'M9 5h11M9 12h11M9 19h11M4 5h.01M4 12h.01M4 19h.01',
 };
 ---
 
